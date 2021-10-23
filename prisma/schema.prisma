@@ -9,7 +9,7 @@ generator client {
 
 model User {
   id   String @id @default(uuid())
-  name String
+  name String?
   github_id Int
   avatar_url String
   login String

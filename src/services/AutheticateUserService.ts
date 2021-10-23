@@ -33,27 +33,28 @@ class AutheticateUserService {
             }
         })
 
-        const { login, id, avatar_url, name } = response.data;
-        console.log('OOOOO', login, id, avatar_url, name)
-
+        let { login, id, avatar_url, name } = response.data;
         let user = await client.user.findFirst({
             where: {
                 github_id: id,
             }
         })
 
+        if(!name){
+            name = '****';
+        }
+
         if (!user) {
-            console.log('Passei aqui')
             user = await client.user.create({
                 data: {
-                    name: name,
+                    name,
                     github_id: id,
-                    avatar_url: avatar_url,
-                    login: login,
+                    avatar_url,
+                    login,
                 }
             })
         }
-        console.log(user);
+
         const token = sign({
             user: {
                 name: user.name,
