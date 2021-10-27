@@ -1,8 +1,25 @@
 import 'dotenv/config';
 import express from 'express';
 import { router } from './routes';
+import http from 'http';
+import { Server } from 'socket.io';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
+
+const serverHttp = http.createServer(app);
+
+const io = new Server (serverHttp, {
+    cors: {
+        origin: "*",
+    }
+});
+
+io.on('connection', socket => {
+    console.log(`Usuario conectado no socket ${socket.id}`);
+})
 
 app.use(express.json());
 app.use(router)
@@ -12,11 +29,9 @@ app.get('/github', (req, res) => {
 })
 
 app.get('/signin/callback', (req, res) => {
-    const {code} = req.query;
+    const { code } = req.query;
 
     res.send(code)
 })
 
-app.listen(3000, ()=>{
-    console.log('listening on port 3000')
-})
+export {serverHttp, io}
