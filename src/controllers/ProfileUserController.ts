@@ -3,7 +3,7 @@ import { ProfileUserService } from "../services/ProfileUserService"
 
 class ProfileUserController {
     async handler(req: Request, res: Response) {
-        const { user_id } = req.params;
+        const { user_id } = req;
 
         const profileUserService = new ProfileUserService();
 

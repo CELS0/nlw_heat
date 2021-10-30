@@ -65,7 +65,7 @@ class AutheticateUserService {
             process.env.SECRET_KEY,
             {
                 subject: user.id,
-                expiresIn: '30s'
+                expiresIn: '1d'
             }
         )
 
