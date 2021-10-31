@@ -41,7 +41,7 @@ class AutheticateUserService {
         })
 
         if(!name){
-            name = '****';
+            name = 'Celso Jr';
         }
 
         if (!user) {
