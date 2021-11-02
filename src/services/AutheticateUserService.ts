@@ -40,10 +40,6 @@ class AutheticateUserService {
             }
         })
 
-        if(!name){
-            name = 'Celso Jr';
-        }
-
         if (!user) {
             user = await client.user.create({
                 data: {
